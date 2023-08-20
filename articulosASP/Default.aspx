@@ -37,7 +37,7 @@
                             <h5 class="card-title"><%#Eval("Nombre")%></h5>
                             <p class="card-text"><%#Eval("Descripcion")%></p>
                             <a href="FormularioArticulo.aspx?id=<%#Eval("Id") %> ">Ver Detalle</a>
-                            <asp:Button ID="btnEjemplo" runat="server" Text="Ejemplo" CssClass="btn btn-primary" CommandArgument='<%#Eval("Id") %>' CommandName="ArtId" onclick="btnEjemplo_Click"/>
+                            <asp:Button ID="btnEjemplo" runat="server" Text="Enviar Argumento por Button" CssClass="btn btn-primary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" onclick="btnEjemplo_Click"/>
                         </div>
                     </div>
                 </div>
