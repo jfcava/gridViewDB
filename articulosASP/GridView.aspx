@@ -3,15 +3,21 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Listado de Artículos</h1>
-    <asp:GridView ID="gvArticulos" runat="server" CssClass="table" AutoGenerateColumns="false">
+    <asp:GridView ID="gvArticulos" runat="server" DataKeyNames="Id" 
+        CssClass="table" AutoGenerateColumns="false"
+        OnSelectedIndexChanged="gvArticulos_SelectedIndexChanged"
+        OnPageIndexChanging="gvArticulos_PageIndexChanging"
+        AllowPaging="true" PageSize="5">
         <Columns>
             <asp:BoundField HeaderText="Código" DataField="Codigo" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
-            <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+            <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />            
             <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C2}" />
+            <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="✏" />
 
         </Columns>
     </asp:GridView>
+    <a href="FormularioArticulo.aspx" class="btn btn-primary">Agregar</a>
 </asp:Content>

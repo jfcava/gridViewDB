@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
-    <Content Include="Detalle.aspx" />
+    <Content Include="FormularioArticulo.aspx" />
     <Content Include="GridView.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,12 +80,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Detalle.aspx.cs">
-      <DependentUpon>Detalle.aspx</DependentUpon>
+    <Compile Include="FormularioArticulo.aspx.cs">
+      <DependentUpon>FormularioArticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Detalle.aspx.designer.cs">
-      <DependentUpon>Detalle.aspx</DependentUpon>
+    <Compile Include="FormularioArticulo.aspx.designer.cs">
+      <DependentUpon>FormularioArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="GridView.aspx.cs">
       <DependentUpon>GridView.aspx</DependentUpon>

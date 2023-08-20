@@ -11,7 +11,7 @@ namespace articulosASP
 {
 
 
-    public partial class Detalle
+    public partial class FormularioArticulo
     {
     }
 }
