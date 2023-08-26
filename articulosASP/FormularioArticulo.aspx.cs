@@ -31,5 +31,10 @@ namespace articulosASP
                 throw ex;
             }
         }
+
+        protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
+        {
+            imgArticulo.ImageUrl = txtUrlImagen.Text;
+        }
     }
 }

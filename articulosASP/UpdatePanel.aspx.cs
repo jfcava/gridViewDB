@@ -13,5 +13,19 @@ namespace articulosASP
         {
 
         }
+
+        protected void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lblNombre.Text = txtNombre.Text;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
