@@ -110,8 +110,8 @@ namespace negocio
                 datos.setearConsulta("insert into ARTICULOS values (@codigo,@nombre,@descripcion,@idMarca,@idCategoria,@urlImagen,@precio)");
                 datos.setearParametros("@codigo", nuevo.Codigo);
                 datos.setearParametros("@nombre", nuevo.Nombre);
-                datos.setearParametros("descripcion", nuevo.Descripcion);                
-                datos.setearParametros("idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@descripcion", nuevo.Descripcion);                
+                datos.setearParametros("@idMarca", nuevo.Marca.Id);
                 datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
                 datos.setearParametros("@urlImagen", nuevo.ImagenUrl);
                 datos.setearParametros("@precio", nuevo.Precio);
@@ -128,7 +128,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
         public void agregarConSP(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -156,14 +155,14 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void eliminar(Articulo seleccionado)
+        public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
                 datos.setearConsulta("delete from ARTICULOS where id=@id");
-                datos.setearParametros("id", seleccionado.Id);
+                datos.setearParametros("id", id);
 
                 datos.ejecutarEscritura();
             }
@@ -176,7 +175,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
         public void modificar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -204,7 +202,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
         public void modificarSP(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -232,7 +229,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             AccesoDatos datos = new AccesoDatos();

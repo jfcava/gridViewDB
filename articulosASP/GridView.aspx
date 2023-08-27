@@ -3,8 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Listado de Artículos</h1>
+    <hr />
     <asp:GridView ID="gvArticulos" runat="server" DataKeyNames="Id" 
-        CssClass="table table-dark table-sm" AutoGenerateColumns="false"
+        CssClass="table" AutoGenerateColumns="false"
         OnSelectedIndexChanged="gvArticulos_SelectedIndexChanged"
         OnPageIndexChanging="gvArticulos_PageIndexChanging"
         AllowPaging="true" PageSize="10">

@@ -2,6 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,9 +12,11 @@ namespace articulosASP
 {
     public partial class FormularioArticulo : System.Web.UI.Page
     {
+        public bool ConfirmaEliminar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false;
+            ConfirmaEliminar = false;
 
             try
             {
@@ -32,6 +35,8 @@ namespace articulosASP
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataValueField = "Id";
                     ddlCategoria.DataBind();
+
+                    btnEliminar.Visible = false;
                 }
 
                 //Configuracion si se esta modificando.
@@ -39,6 +44,7 @@ namespace articulosASP
                 //carga la pagina devuelta y se cargan los valores nuevamente.
                 if (Request.QueryString["id"] != null && !IsPostBack)
                 {
+                    btnEliminar.Visible = true;
                     string id = Request.QueryString["id"].ToString();
                     ArticuloNegocio negocio = new ArticuloNegocio();
                     List<Articulo> listaModificado = negocio.listar(id);
@@ -58,6 +64,7 @@ namespace articulosASP
 
                     //Forzo el evento para que muestre la imagen al modificar.
                     txtUrlImagen_TextChanged(sender, e);
+
                 }
             }
             catch (Exception ex)
@@ -99,6 +106,27 @@ namespace articulosASP
                 else
                     negocio.agregarConSP(nuevo);
 
+                Response.Redirect("GridView.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmaEliminar = true;
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                negocio.eliminar(int.Parse(txtId.Text));
                 Response.Redirect("GridView.aspx", false);
             }
             catch (Exception ex)
