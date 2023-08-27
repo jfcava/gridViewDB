@@ -13,14 +13,24 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> listar()
+        //En este caso, el id = "", es un parametro opcional.
+        //Si se envia un argumento, se guarda dentro de la variable id
+        //sino queda con el valor en vacio ("")
+        public List<Articulo> listar(string id = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Articulo> lista = new List<Articulo>();
 
             try
             {
-                datos.setearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id And A.IdCategoria = C.Id");
+                //Si entra un argumento dentro de id, se agrega a la consulta.
+                string consulta = "select A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id And A.IdCategoria = C.Id";
+                if(id != "")
+                {
+                    consulta += " And A.Id = " + id;
+                }
+                
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -119,6 +129,33 @@ namespace negocio
             }
         }
 
+        public void agregarConSP(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("agregarSP");
+                datos.setearParametros("@codigo", nuevo.Codigo);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("descripcion", nuevo.Descripcion);
+                datos.setearParametros("idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametros("@urlImagen", nuevo.ImagenUrl);
+                datos.setearParametros("@precio", nuevo.Precio);
+
+                datos.ejecutarEscritura();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(Articulo seleccionado)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -147,6 +184,34 @@ namespace negocio
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo=@codigo,Nombre=@nombre,Descripcion=@descripcion,IdMarca=@idMarca,IdCategoria=@idCategoria,ImagenUrl=@imagenUrl,Precio=@precio where id=@id");
+                datos.setearParametros("@codigo", nuevo.Codigo);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("@descripcion", nuevo.Descripcion);
+                datos.setearParametros("@idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
+                datos.setearParametros("@precio", nuevo.Precio);
+                datos.setearParametros("@id", nuevo.Id);
+
+                datos.ejecutarEscritura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificarSP(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("modificarSP");
                 datos.setearParametros("@codigo", nuevo.Codigo);
                 datos.setearParametros("@nombre", nuevo.Nombre);
                 datos.setearParametros("@descripcion", nuevo.Descripcion);
@@ -286,5 +351,6 @@ namespace negocio
             }
 
         }
+        
     }
 }
