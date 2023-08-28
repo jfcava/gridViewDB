@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace articulosASP
 {
@@ -13,7 +14,8 @@ namespace articulosASP
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            gvArticulos.DataSource = negocio.listarConSP();
+            Session.Add("listaArticulos", negocio.listarConSP());
+            gvArticulos.DataSource = Session["listaArticulos"];
             gvArticulos.DataBind();
         }
 
@@ -27,6 +29,19 @@ namespace articulosASP
         {
             gvArticulos.PageIndex = e.NewPageIndex;
             gvArticulos.DataBind();
+        }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            gvArticulos.DataSource = listaFiltrada;
+            gvArticulos.DataBind();
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtFiltro.Text = "";
+            
         }
     }
 }
