@@ -14,12 +14,52 @@
                     <div class="mb-3">
                         <asp:Label Text="Filtro" runat="server" CssClass="form-label" />
                         <asp:TextBox runat="server" ID="txtFiltro" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" CssClass="form-control" />
+                        <asp:CheckBox ID="ckbFiltroAvanzado" runat="server" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="ckbFiltroAvanzado_CheckedChanged" />
                     </div>
-                    <div class="col-6">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
                         <asp:Button Text="Limpiar" runat="server" ID="btnLimpiar" CssClass="btn btn-warning" OnClick="btnLimpiar_Click" />
                     </div>
                 </div>
             </div>
+            <%if (ckbFiltroAvanzado.Checked)
+                { %>
+            <div class="row">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <asp:Label Text="Campo" runat="server" CssClass="form-label" />
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+                            <asp:ListItem Text="Código" />
+                            <asp:ListItem Text="Nombre" />
+                            <asp:ListItem Text="Marca" />
+                            <asp:ListItem Text="Categoría" />
+                            <asp:ListItem Text="Precio" />
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3">
+                        <asp:Label Text="Criterio" runat="server" CssClass="form-label" />
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCriterio"></asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3">
+                        <asp:Label Text="Filtro" runat="server" CssClass="form-label" />
+                        <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <asp:Button Text="Buscar" runat="server" ID="btnBuscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
+                </div>
+            </div>
+            <%} %>
             <hr />
             <asp:GridView ID="gvArticulos" runat="server" DataKeyNames="Id"
                 CssClass="table" AutoGenerateColumns="false"

@@ -31,6 +31,7 @@ namespace articulosASP
             gvArticulos.DataBind();
         }
 
+        // FILTRO RAPIDO
         protected void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             List<Articulo> listaFiltrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
@@ -40,8 +41,41 @@ namespace articulosASP
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtFiltro.Text = "";
-            
+            txtFiltro.Text = "";            
+        }
+
+        protected void ckbFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbFiltroAvanzado.Checked)
+                txtFiltro.Enabled = false;
+            else
+                txtFiltro.Enabled = true;
+        }
+        
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();
+            if(ddlCampo.SelectedItem.ToString() == "Precio")
+            {
+                ddlCriterio.Items.Add("Mayor a");
+                ddlCriterio.Items.Add("Menor a");
+                ddlCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Empieza con");
+                ddlCriterio.Items.Add("Termina con");
+                ddlCriterio.Items.Add("Contiene");
+            }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            gvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                ddlCriterio.SelectedItem.ToString(),
+                txtFiltroAvanzado.Text);
+            gvArticulos.DataBind();
         }
     }
 }
