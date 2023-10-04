@@ -13,9 +13,14 @@ namespace articulosASP.Login
         {
             if (Session["usuario"] == null)
             {
-                Session.Add("error", "Debes loguearte para ingresar");
+                Session.Add("error", "No no.. Debes loguearte para ingresar");
                 Response.Redirect("../Error.aspx", false);
             }
+        }
+
+        protected void btnLogueoAdmin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogueoExitosoAdmin.aspx", false);
         }
     }
 }
