@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="DropDownListEnlazados.aspx" />
+    <Content Include="EnvioMail.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="GridView.aspx" />
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="DropDownListEnlazados.aspx.designer.cs">
       <DependentUpon>DropDownListEnlazados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnvioMail.aspx.cs">
+      <DependentUpon>EnvioMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnvioMail.aspx.designer.cs">
+      <DependentUpon>EnvioMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

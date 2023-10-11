@@ -33,6 +33,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="../Logueos/Logueo.aspx">Login</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="../EnvioMail.aspx">Envio EMail</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -43,7 +46,7 @@
             </div>
         </div>
     </form>
-        
+
 
 </body>
 </html>
