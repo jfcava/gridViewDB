@@ -13,7 +13,8 @@
         else
         {  %>
     <h1 style="padding-top: 20px;">Nuevo Artículo</h1>
-    <%}%>
+    <%}
+%>
     <hr />
     <div class="row">
         <div class="col-6">
