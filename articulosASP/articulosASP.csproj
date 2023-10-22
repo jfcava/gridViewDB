@@ -77,6 +77,7 @@
     <Content Include="Logueos\Logueo.aspx" />
     <Content Include="Logueos\LogueoExitoso.aspx" />
     <Content Include="Logueos\LogueoExitosoAdmin.aspx" />
+    <Content Include="Registro.aspx" />
     <Content Include="UpdatePanel.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="base.Master.designer.cs">
       <DependentUpon>base.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="UpdatePanel.aspx.cs">
       <DependentUpon>UpdatePanel.aspx</DependentUpon>

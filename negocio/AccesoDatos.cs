@@ -65,6 +65,22 @@ namespace negocio
             }
         }
 
+        //Metodo que devuelve un dato cuando escribe en la DB.
+        //Para esto, en el procedimiento, se define un OUTPUT
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void setearParametros(string nombre, object valor)
         {
             comando.Parameters.AddWithValue(nombre, valor);
