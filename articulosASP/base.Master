@@ -31,10 +31,16 @@
                                 <a class="nav-link active" href="../GridView.aspx">GridView</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="../Logueos/Logueo.aspx">Login</a>
+                                <a class="nav-link active" href="../Logueos/Logueo.aspx">Login de Prueba</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="../EnvioMail.aspx">Envio EMail</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="../MiPerfil.aspx">Mi Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="../LoginPosta.aspx">Login Posta</a>
                             </li>
                         </ul>
                     </div>

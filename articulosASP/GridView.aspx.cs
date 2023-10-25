@@ -13,6 +13,12 @@ namespace articulosASP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Seguridad.esAdmin(Session["usuario"])))
+            {
+                Session.Add("error", "No tenes permiso de Admin");
+                Response.Redirect("Error.aspx", false);
+            }
+
             ArticuloNegocio negocio = new ArticuloNegocio();
             Session.Add("listaArticulos", negocio.listarConSP());
             gvArticulos.DataSource = Session["listaArticulos"];
