@@ -26,9 +26,10 @@ namespace articulosASP
 
                 usuario.Email = txtEmail.Text;
                 usuario.Pass = txtPassword.Text;
-                int id = negocio.insertarNuevo(usuario);
+                usuario.Id = negocio.insertarNuevo(usuario);
+                Session.Add("usuario", usuario);
 
-                emailService.armarCorreo(usuario.Email, "Bienvenido Usuario " + usuario.Email + "!", "Te damos la bienvenida a la aplicacion. Tu perfil fue creado con exito!");
+                emailService.armarCorreo(usuario.Email, "Bienvenido Usuario " + usuario.Email + "!", "Te damos la bienvenida a la aplicacion. Tu perfil fue creado con exito! Recorda que tu password es:" + usuario.Pass);
                 emailService.enviarEmail();
 
                 Response.Redirect("Default.aspx", false);

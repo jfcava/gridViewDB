@@ -10,6 +10,28 @@ namespace negocio
 {
     public class UserNegocio
     {
+        public void actualizar(User usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update USERS set imagenPerfil = @imagen, nombre = @nombre, apellido = @apellido Where Id = @id");
+                datos.setearParametros("@imagen", usuario.ImagenPerfil);
+                datos.setearParametros("@nombre", usuario.Nombre);
+                datos.setearParametros("@apellido", usuario.Apellido);
+                datos.setearParametros("@id", usuario.Id);
+                datos.ejecutarEscritura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public int insertarNuevo(User usuario)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -36,7 +58,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, email, pass, admin from USERS where email = @email and pass = @pass");
+                datos.setearConsulta("select id, email, pass, admin, imagenPerfil, nombre, apellido from USERS where email = @email and pass = @pass");
                 datos.setearParametros("@email", usuario.Email);
                 datos.setearParametros("@pass", usuario.Pass);
                 datos.ejecutarLectura();
@@ -44,6 +66,10 @@ namespace negocio
                 {
                     usuario.Id = (int)datos.Lector["id"];
                     usuario.Admin = (bool)datos.Lector["admin"];
+                    if(!(datos.Lector["imagenPerfil"] is DBNull))
+                        usuario.ImagenPerfil = (string)datos.Lector["imagenPerfil"];
+                    usuario.Nombre = (string)datos.Lector["nombre"];
+                    usuario.Apellido = (string)datos.Lector["apellido"];
                     return true;
                 }
                 return false;

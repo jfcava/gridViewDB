@@ -4,9 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
+        <hr />
+        <h2>Creá tu perfil</h2>
         <div class="col-4">
-            <hr />
-            <h2>Creá tu perfil</h2>
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">E-Mail</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
@@ -15,7 +15,7 @@
                 <label for="txtPassword" class="form-label">Password</label>
                 <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             </div>
-            <asp:Button Text="Registrarse" runat="server" ID="btnRegistrarse" CssClass="btn btn-primary" OnClick="btnRegistrarse_Click"/>
+            <asp:Button Text="Registrarse" runat="server" ID="btnRegistrarse" CssClass="btn btn-primary" OnClick="btnRegistrarse_Click" />
             <a href="/">Cancelar</a>
         </div>
     </div>
