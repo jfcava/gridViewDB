@@ -16,7 +16,14 @@ namespace negocio
             try
             {
                 datos.setearConsulta("update USERS set imagenPerfil = @imagen, nombre = @nombre, apellido = @apellido, fechaNacimiento = @fecha Where Id = @id");
-                datos.setearParametros("@imagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : "");
+                
+                //Enviar un DBNull a la base de datos, se transforma en OBJECT para que me deje.
+                //datos.setearParametros("@imagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : (object)DBNull.Value);
+
+                //Operador para evaluar NULOS. "Null Coalescing"
+                // Es igual que el operador ternario anterior, pero solo evalua nulos y deja enviar NULL a la DB
+                datos.setearParametros("@imagen", (object)usuario.ImagenPerfil ?? DBNull.Value);
+
                 datos.setearParametros("@nombre", usuario.Nombre);
                 datos.setearParametros("@apellido", usuario.Apellido);
                 datos.setearParametros("@id", usuario.Id);
