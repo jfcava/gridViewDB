@@ -15,11 +15,12 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update USERS set imagenPerfil = @imagen, nombre = @nombre, apellido = @apellido Where Id = @id");
-                datos.setearParametros("@imagen", usuario.ImagenPerfil);
+                datos.setearConsulta("update USERS set imagenPerfil = @imagen, nombre = @nombre, apellido = @apellido, fechaNacimiento = @fecha Where Id = @id");
+                datos.setearParametros("@imagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : "");
                 datos.setearParametros("@nombre", usuario.Nombre);
                 datos.setearParametros("@apellido", usuario.Apellido);
                 datos.setearParametros("@id", usuario.Id);
+                datos.setearParametros("@fecha", usuario.FechaNacimiento);
                 datos.ejecutarEscritura();
             }
             catch (Exception ex)
@@ -58,7 +59,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, email, pass, admin, imagenPerfil, nombre, apellido from USERS where email = @email and pass = @pass");
+                datos.setearConsulta("select id, email, pass, admin, imagenPerfil, nombre, apellido, fechaNacimiento from USERS where email = @email and pass = @pass");
                 datos.setearParametros("@email", usuario.Email);
                 datos.setearParametros("@pass", usuario.Pass);
                 datos.ejecutarLectura();
@@ -68,8 +69,12 @@ namespace negocio
                     usuario.Admin = (bool)datos.Lector["admin"];
                     if(!(datos.Lector["imagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["imagenPerfil"];
-                    usuario.Nombre = (string)datos.Lector["nombre"];
-                    usuario.Apellido = (string)datos.Lector["apellido"];
+                    if(!(datos.Lector["nombre"] is DBNull))
+                        usuario.Nombre = (string)datos.Lector["nombre"];
+                    if(!(datos.Lector["apellido"] is DBNull))
+                        usuario.Apellido = (string)datos.Lector["apellido"];
+                    if (!(datos.Lector["fechaNacimiento"] is DBNull))
+                        usuario.FechaNacimiento = DateTime.Parse(datos.Lector["fechaNacimiento"].ToString());
                     return true;
                 }
                 return false;
