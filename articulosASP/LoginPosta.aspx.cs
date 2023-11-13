@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -40,6 +41,20 @@ namespace articulosASP
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
+        }
+
+        
+       //El Page_Error es otra capa intermedia de manejo de errores.
+       //Maneja los errores que se produzcan en esta pagina
+       //Primero se maneja con TRY CATCH de cada metodo
+       //Si no existiera entra en el Page_Error
+       //Y sino salta por el manejo de error del Global.asax
+        private void Page_Error(object sender, EventArgs e)
+        {
+            Exception exc = Server.GetLastError();
+
+            Session.Add("error", exc.ToString());
+            Server.Transfer("Error.aspx");
         }
     }
 }

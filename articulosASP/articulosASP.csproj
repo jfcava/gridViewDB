@@ -72,6 +72,7 @@
     <Content Include="EnvioMail.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FormularioArticulo.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="GridView.aspx" />
     <Content Include="ListadoArticulos.aspx" />
     <Content Include="LoginPosta.aspx" />
@@ -118,6 +119,9 @@
     </Compile>
     <Compile Include="FormularioArticulo.aspx.designer.cs">
       <DependentUpon>FormularioArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GridView.aspx.cs">
       <DependentUpon>GridView.aspx</DependentUpon>
