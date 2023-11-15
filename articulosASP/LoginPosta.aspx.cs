@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Timers;
 using System.Web;
 using System.Web.UI;
@@ -23,6 +24,14 @@ namespace articulosASP
             UserNegocio negocio = new UserNegocio();
             try
             {
+                //Genere una clase estatica llamada VALIDACION, para incluir
+                //el metodo validaTextoVacio que pregunta si es o no vacio o nulo
+                if(Validacion.validaTextoVacio(txtUsuario) || Validacion.validaTextoVacio(txtPassword))
+                {
+                    Session.Add("error", "Debes completar ambos campos");
+                    Response.Redirect("Error.aspx");
+                }
+                
                 usuario.Email = txtUsuario.Text;
                 usuario.Pass = txtPassword.Text;
                 if (negocio.Login(usuario))
@@ -36,8 +45,11 @@ namespace articulosASP
                     Response.Redirect("Error.aspx", false);
                 }
             }
+            //Catcheo del error de ThreadAbortException, y hacemos que no
+            //haga nada. Tambien se puede hacer un IF dentro del siguiente catch.
+            catch (ThreadAbortException) { }
             catch (Exception ex)
-            {
+            {                
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }

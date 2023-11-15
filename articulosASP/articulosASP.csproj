@@ -194,6 +194,7 @@
     <Compile Include="UpdatePanel.aspx.designer.cs">
       <DependentUpon>UpdatePanel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Validacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
