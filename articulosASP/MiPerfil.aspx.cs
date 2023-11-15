@@ -32,6 +32,14 @@ namespace articulosASP
         {
             try
             {
+                //Como los validadores de los campos, validan luego que se ejecuta toda
+                //la instruccion del boton. Primero ejecturo el Page.Validate para que ejecute las
+                //validaciones. Luego pregunto.. si las validaciones NO SON VALIDAS.. corto la ejecucion.
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
+
                 UserNegocio negocio = new UserNegocio();
                 User usuario = (User)Session["usuario"];
                 

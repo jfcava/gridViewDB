@@ -14,10 +14,10 @@ namespace articulosASP
             {
                 if (string.IsNullOrEmpty(((TextBox)control).Text))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }
