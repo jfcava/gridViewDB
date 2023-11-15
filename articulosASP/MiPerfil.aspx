@@ -35,6 +35,24 @@
             <div class="mb-3">
                 <label for="txtApellido" class="form-label">Apellido</label>
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
+                <%--VALIDACIONES CON RANGEVALIDATOR Y REGULAREXPRESSION VALIDATOR--%>
+                <%--Con RangeValidator puedo validar si un campo esta dentro de un minimo y un maximo--%>
+                <asp:RangeValidator ErrorMessage="Fuera de rango" ControlToValidate="txtApellido" runat="server" Type="Integer" MinimumValue="1" MaximumValue="20" />
+
+                <%--Con RegularExpressionValidator puedo validar si un campo cumple con la expresion regular
+                que le ingrese. Las expresiones regulares se pueden googlear segun lo que necesito
+                    Ejemplos:
+
+                Expresiones Regulares
+                Sólo Números
+                ^[0-9]+$
+
+                Formato Email
+                ^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$--%>
+
+                <asp:RegularExpressionValidator ErrorMessage="Solo números" ControlToValidate="txtApellido" runat="server" ValidationExpression="^[0-9]+$" />
+
+
             </div>
             <div class="mb-3">
                 <label for="txtFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
