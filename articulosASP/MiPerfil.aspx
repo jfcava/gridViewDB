@@ -7,6 +7,20 @@
             font-size: 14px;
         }
     </style>
+    <script>
+        function validar() {
+            //capturar el control
+            const txtNombre = document.getElementById("txtNombre");
+            if (txtNombre.value == "") {
+                //Con esta intruccion puedo agregar clases de bootstrap o cualquier otra a un control
+                //Con classList.Remove puedo removerlas
+                txtNombre.classList.add("is-invalid");
+                alert("Debes cargar el nombre");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <hr />
@@ -23,8 +37,18 @@
             </div>
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                
+               <%-- 
+                Con ClienIDMode puedo volver el id de un elemento en estatico,
+                para que no cambie de nombre al convertirse a HTML, y de esta manera
+                puedo manipularlo con Javascript en el navegador en tiempo de ejecucion.
+                   Esto lo hago en la etiqueta SCRIPT, y en este ejemplo valido
+                   que el nombre no este vacio--%>
+                <asp:TextBox ID="txtNombre" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
 
+            
+                
+                
                 <%--Validacion mediante ASP - Requiere agregar configuracion de jQuery
                 de dos maneras. En el archivo Web.config o en el Global.asax
                     Estas validaciones utilizan Javascript y para que funcionen necesita
@@ -68,7 +92,10 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
+                
+               <%-- En el OnClientClick disparo la funcion validar de JavaScript. Este evento
+                sucede antes de ejecutarse el Onclick--%>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClientClick="return validar()" OnClick="btnGuardar_Click" />
                 <a href="/">Regresar</a>
             </div>
         </div>
